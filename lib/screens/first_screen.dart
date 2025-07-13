@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/palindrome_checker.dart'; // menggunakan fungsi util
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -11,15 +12,9 @@ class _FirstScreenState extends State<FirstScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _palindromeController = TextEditingController();
 
-  bool isPalindrome(String text) {
-    String cleanText = text.replaceAll(RegExp(r'\s+'), '').toLowerCase();
-    String reversed = cleanText.split('').reversed.join();
-    return cleanText == reversed;
-  }
-
   void _checkPalindrome() {
-    String input = _palindromeController.text.trim();
-    bool result = isPalindrome(input);
+    final input = _palindromeController.text.trim();
+    final result = isPalindrome(input); // dari utils
 
     showDialog(
       context: context,
@@ -41,7 +36,7 @@ class _FirstScreenState extends State<FirstScreen> {
   }
 
   void _goToSecondScreen() {
-    String name = _nameController.text.trim();
+    final name = _nameController.text.trim();
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter your name')),
@@ -80,7 +75,8 @@ class _FirstScreenState extends State<FirstScreen> {
                     filled: true,
                     fillColor: Colors.white12,
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -91,9 +87,10 @@ class _FirstScreenState extends State<FirstScreen> {
                     hintText: 'Palindrome',
                     hintStyle: const TextStyle(color: Colors.white54),
                     filled: true,
-                    fillColor: const Color.fromARGB(31, 215, 202, 202),
+                    fillColor: Colors.white12,
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -106,7 +103,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   child: const Text(
                     'CHECK',
                     style: TextStyle(
-                      color: Colors.white, // <-- teks putih
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -121,7 +118,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   child: const Text(
                     'NEXT',
                     style: TextStyle(
-                      color: Colors.white, // <-- teks putih
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
